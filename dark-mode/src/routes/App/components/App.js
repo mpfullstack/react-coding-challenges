@@ -1,9 +1,24 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import '../styles/_app.scss';
+import { ThemeContext } from '../../../common/context/ThemeContext';
 
 function App() {
+  // useContext hook to get the current value of our ThemeContext
+  const themeContext = React.useContext(ThemeContext);
+
+  // Function to handle the theme toggle, add/remove class to HTML element and set new theme state
+  const handleToggleTheme = (e) => {
+    if (themeContext.theme === 'dark') {
+      themeContext.toggle('light');
+      document.documentElement.classList.remove('dark-mode');
+    } else {
+      themeContext.toggle('dark');
+      document.documentElement.classList.add('dark-mode');
+    }
+  }
+
   return (
     <div className="app">
       <div className="level">
@@ -12,8 +27,10 @@ function App() {
         </div>
 
         {/* --The button that should toggle dark mode-- */}
-        <button className="app__dark-mode-btn icon level-right">
-          <FontAwesomeIcon icon={faMoon} />
+        <button className="app__dark-mode-btn icon level-right" onClick={handleToggleTheme}>
+          <FontAwesomeIcon
+            icon={themeContext.theme === 'light' ? faMoon : faSun}
+            color={themeContext.theme === 'light' ? "inherit" : "#FFA500"}/>
         </button>
 
       </div>
@@ -41,8 +58,8 @@ function App() {
 
       <section className="section">
         <div className="buttons level-right">
-          <a className="button is-primary">Save</a>
-          <a className="button is-link">Submit</a>
+          <a href="/" className="button is-primary">Save</a>
+          <a href="/" className="button is-link">Submit</a>
         </div>
       </section>
     </div>
