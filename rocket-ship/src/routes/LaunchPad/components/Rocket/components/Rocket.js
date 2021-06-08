@@ -4,7 +4,12 @@ import RocketCore from './RocketCore';
 export function FunctionalRocket() {
   const [initialLaunchTime] = useState(Date.now());
 
-  return <RocketCore initialLaunchTime={initialLaunchTime} />;
+  console.log("initialLaunchTime", initialLaunchTime)
+
+  return <div>
+    <RocketCore initialLaunchTime={initialLaunchTime} />
+    <button value="stop">STOP</button>
+  </div>;
 }
 
 export class ClassRocket extends Component {
@@ -19,6 +24,8 @@ export class ClassRocket extends Component {
   render() {
     const { initialLaunchTime } = this.state;
 
-    return <RocketCore initialLaunchTime={initialLaunchTime} />;
+    return <div>
+      <RocketCore initialLaunchTime={initialLaunchTime} />
+    </div>;
   }
 }

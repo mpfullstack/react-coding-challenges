@@ -18,7 +18,13 @@ function generateEmptyListEls(quantity) {
   return [...Array(quantity)].map(() => <li />);
 }
 
-export default function RocketCore({ initialLaunchTime }) {
+export default function RocketCore({ initialLaunchTime, launchStopped }) {
+  React.useEffect(() => {
+    debugger;
+  }, [initialLaunchTime, launchStopped]);
+
+  console.log("RocketCore rendering...");
+
   return (
     <>
       <div className="rocket" style={{ bottom: timeToPositionPercent(initialLaunchTime) }}>
@@ -38,4 +44,4 @@ export default function RocketCore({ initialLaunchTime }) {
       </ul>
     </>
   );
-}
+};
